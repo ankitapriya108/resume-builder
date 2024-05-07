@@ -1,184 +1,215 @@
-import React, { useContext } from 'react'
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import InfoIcon from '@mui/icons-material/Info';
-import AddIcon from '@mui/icons-material/Add';
-import { userData } from './App';
-import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
+
+import React, { useContext } from "react";
+import AddIcon from "@mui/icons-material/Add";
+import InfoIcon from "@mui/icons-material/Info";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { userData } from "./App";
 
 function Work() {
-  const {client,setClient,country,setCountry,projectName,setProjectName,roleWork,setRoleWork,startDate,setStartDate,endDate,setEndDate,businessSolution,setBusinessSolution,projectRes,setProjectRes,technologyStack,setTechnologyStack} = useContext(userData);
+  const { workExperience, setWorkExperience } = useContext(userData);
 
-  function handleInput(index,value){
-    
-    let newInp = [...projectRes]
-     newInp[index] = value ;
-     setProjectRes(newInp);
-   }
-   function handleAdd() {
-     setProjectRes([...projectRes, ""]);
-   }
+  const addForm = () => {
+    const newForm = {
+      clientDescription: "",
+      country: "",
+      projectName: "",
+      roleWork: "",
+      startDate: "",
+      endDate: "",
+      businessSolution: "",
+      technologyStack: [""],
+      projectResponsibility: [""],
+    };
+    setWorkExperience([...workExperience, newForm]);
+  };
 
- function handleresponsibility(index,value){
-    
-  let newInp = [...technologyStack]
-   newInp[index] = value ;
-   setTechnologyStack(newInp);
- }
- function handleplus() {
-   setTechnologyStack([...technologyStack, ""]);
-  }
+  const handleInput = (
+    index,
+    fieldName,
+    value,
+    solutionIndex,
+    projectIndex
+  ) => {
+    const updatedWorkExperience = [...workExperience];
 
+    if (fieldName === "technologyStack") {
+      updatedWorkExperience[index][fieldName][solutionIndex] = value;
+    } else if (fieldName === "projectResponsibility") {
+      updatedWorkExperience[index][fieldName][projectIndex] = value;
+    } else {
+      updatedWorkExperience[index][fieldName] = value;
+    }
+
+    setWorkExperience(updatedWorkExperience);
+  };
+  const addBusinessSolutionInput = (index) => {
+    const updatedWorkExperience = [...workExperience];
+    updatedWorkExperience[index].technologyStack.push(""); 
+    setWorkExperience(updatedWorkExperience);
+  };
+  const addProjectInput = (index) => {
+    const updatedWorkExperience = [...workExperience];
+    updatedWorkExperience[index].projectResponsibility.push("");
+    setWorkExperience(updatedWorkExperience);
+  };
   return (
-    <>
-   
-   <div className='mx-4'>
-    <h3 className='mt-[2rem]'>Work Experience <InfoIcon/> </h3>
-    <div className='flex justify-left gap-[3rem] items-center mt-[1rem]'>
-      <label>Client Description</label>
-      <input type="text" 
-      value={client}
-      onChange={(e)=>{
-        setClient(e.target.value)
-      }}
-      className='border-2 border-black h-[2.5rem] w-[65%] px-2' />
-    </div>
+    <div className="mx-4">
+      <h3 className="mt-[1rem] mb-[2rem] font-bold text-2xl flex items-center justify-center gap-2">
+        WORK EXPERIENCE <InfoIcon />
+      </h3>
 
-    <div className='flex justify-left gap-[7.2rem] items-center mt-[1rem]'>
-      <label>Country</label>
-      <input type="text"
-      value={country} 
-      onChange={(e)=>{
-        setCountry(e.target.value)
-      }}
-      
-      className='border-2 border-black h-[2.5rem] w-[65%] px-2' />
-    </div>
+      {workExperience.map((form, index) => (
+        <div key={index}>
+          <div className="flex justify-left gap-[2.9rem] items-center mt-[1rem]">
+            <label className="font-medium text-[1.2rem]">Client Description</label>
+            <input
+              type="text"
+              value={form.clientDescription}
+              onChange={(e) =>
+                handleInput(index, "clientDescription", e.target.value)
+              }
+              className="border-2 border-gray-500 rounded h-[2.5rem] w-[60%] px-3"
+            />
+          </div>
 
-    <div className='flex justify-left gap-[4.8rem] items-center mt-[1rem]'>
-      <label>Project Name</label>
-      <input type="text" 
-      value={projectName}
-      onChange={(e)=>{
-        setProjectName(e.target.value)
-      }}
-      className='border-2 border-black h-[2.5rem] w-[65%] px-2' />
-    </div>
+          <div className="flex justify-left gap-[8.2rem] items-center mt-[1rem]">
+            <label className="font-medium text-[1.2rem]">Country</label>
+            <input
+              type="text"
+              value={form.country}
+              onChange={(e) => handleInput(index, "country", e.target.value)}
+              className="border-2 border-gray-500 rounded h-[2.5rem] w-[60%] px-3"
+            />
+          </div>
 
-    <div className='flex justify-left gap-[9rem] items-center mt-[1rem]'>
-      <label>Role</label>
-      <div className='flex justify-left gap-[1rem] items-center'>
-      <input type="text"
-      value={roleWork} 
-      onChange={(e)=>{
-        setRoleWork(e.target.value)
-      }}
-      className='border-2 border-black h-[2.5rem] w-[22.5rem] px-2' />
-      </div> 
-    </div>
+          <div className="flex justify-left gap-[5.3rem] items-center mt-[1rem]">
+            <label className="font-medium text-[1.2rem]">Project Name</label>
+            <input
+              type="text"
+              value={form.projectName}
+              onChange={(e) =>
+                handleInput(index, "projectName", e.target.value)
+              }
+              className="border-2 border-gray-500 rounded h-[2.5rem] w-[60%] px-3"
+            />
+          </div>
 
-    <div className='flex justify-left gap-[7rem] items-center mt-[1rem]'>
-      <label>Duration</label>
-      <div className='flex justify-left gap-[1rem] items-center'>
-      <input type="date" 
-      value={startDate}
-      onChange={(e)=>{
-        setStartDate(e.target.value)
-      }}
-      className='border-2 border-black h-[2.5rem] w-[9rem] px-2' />
-      <input type="date"
-      value={endDate}
-      onChange={(e)=>{
-        setEndDate(e.target.value)
-      }} className='border-2 border-black h-[2.5rem] w-[9rem] px-2' />
+          <div className="flex justify-left gap-[10.4rem] items-center mt-[1rem]">
+            <label className="font-medium text-[1.2rem]">Role</label>
+            <input
+              type="text"
+              value={form.roleWork}
+              onChange={(e) => handleInput(index, "roleWork", e.target.value)}
+              className="border-2 border-gray-500 px-2 py-1 w-[6rem] rounded"
+            />
+          </div>
+
+          <div className="flex justify-left gap-[8rem] items-center mt-[1rem]">
+            <label className="font-medium text-[1.2rem]">Duration</label>
+            <div className="flex gap-[1rem]">
+              <input
+                type="date"
+                value={form.startDate}
+                onChange={(e) =>
+                  handleInput(index, "startDate", e.target.value)
+                }
+                className="border-2 border-gray-500 rounded w-[9rem] px-2 py-1"
+              />
+              <input
+                type="date"
+                value={form.endDate}
+                onChange={(e) => handleInput(index, "endDate", e.target.value)}
+                className="border-2 border-gray-500 rounded w-[9rem] px-2 py-1"
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-left gap-[3.4rem] items-center mt-[1rem]">
+            <label className="font-medium text-[1.2rem]">Business Solution</label>
+            <textarea
+              value={form.businessSolution}
+              onChange={(e) =>
+                handleInput(index, "businessSolution", e.target.value)
+              }
+              className="border-2 border-gray-500 rounded h-[7rem] w-[60%] px-3"
+            />
+          </div>
+          <div>
+            {/* <div> */}
+            <div className="gap-x-[3.4rem] flex items-center justify-items-start">
+              <label className="font-medium text-[1.2rem]">Technology Stack</label>
+              <div className="flex gap-x-2">
+                <div className="flex flex-wrap gap-x-[1rem]">
+                  {form.technologyStack.map((solution, solutionIndex) => (
+                    <div key={solutionIndex} className="  mt-[1rem]">
+                      <input
+                        type="text"
+                        value={solution}
+                        onChange={(e) =>
+                          handleInput(
+                            index,
+                            "technologyStack",
+                            e.target.value,
+                            solutionIndex
+                          )
+                        }
+                        className="border-2 border-gray-500 rounded w-[8rem] py-1 px-3"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-left items-center mt-[1rem]">
+                  <button onClick={() => addBusinessSolutionInput(index)}>
+                    <AddCircleOutlineIcon />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div className="gap-[1.3rem] flex items-center justify-items-start">
+              <label className="font-medium text-[1.2rem]">Project Responsibility</label>
+              <div className="flex gap-2">
+                <div className="">
+                  {form.projectResponsibility.map((project, projectIndex) => (
+                    <div key={projectIndex} className="mt-[1rem]">
+                      <input
+                        type="text"
+                        value={project}
+                        onChange={(e) =>
+                          handleInput(
+                            index,
+                            "projectResponsibility",
+                            e.target.value,
+                            null,
+                            projectIndex
+                          )
+                        }
+                        className="border-2 border-gray-500 rounded w-[20rem] py-1 px-3"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-left items-center mt-[1rem]">
+                  <button onClick={() => addProjectInput(index)}>
+                    <AddCircleOutlineIcon />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+      {/* <hr className="mt-[1rem]" /> */}
+      <div
+        onClick={addForm}
+        className=" font-medium text-[1.2rem] w-[16rem] border-2 border-gray-500 rounded-full px-2 py-2 mt-10 text-center cursor-pointer"
+      >
+        <AddIcon /> Add Work Experience
       </div>
     </div>
-
-    <div className='flex justify-left gap-[3rem] items-center mt-[1rem]'>
-      <label>Business Solution</label>
-      <textarea name="" id="" cols="47" rows="4" className='border-2 border-black px-2' 
-      onChange={(e)=>{
-       setBusinessSolution(e.target.value)
-      }}>{businessSolution}</textarea>
-    </div>
-
-    <div className='flex justify-left gap-[5.5rem] items-center mt-[1rem]'>
-      <label>Technology Stack</label>
-      <div className='flex justify-left gap-[1rem] items-center'>
-
-      <div className="flex ">
-
-<div className="flex flex-wrap  gap-[1rem] mt-2">
-          {technologyStack.map((item, index) => (
-            // console.log(item);
-            <div key={index} className="">
-              <input
-                className="border-black border-2 w-[6rem] px-1 py-1 rounded-full"
-                type="text"
-                value={item.value}
-                onChange={(e) =>{
-                  handleresponsibility(index,e.target.value)}
-                } 
-              />
-              
-            </div>
-          ))}
-           
-        </div>
-        <button onClick={handleplus}>
-          <AddCircleOutlineIcon />
-        </button>
-     </div>
-
-
-      {/* <input type="text" className='border-2 border-black h-[2.5rem] w-[6rem] rounded-full' /> */}
-      {/* <AddCircleOutline/> */}
-      </div> 
-    </div>
-
-    <div className='flex justify-left gap-[1.5rem] items-center mt-[1rem]'>
-
-      <label>Project Responsibility</label>
-      {/* <input type="text" 
-      value={projectRes}
-      onChange={(e)=>{
-        setProjectRes(e.target.value)
-      }}
-      className='border-2 border-black h-[4rem] w-[65%]' /> */}
-    <div className="flex ">
-
-<div className="flex flex-col gap-[1rem] mt-2">
-          {projectRes.map((item, index) => (
-            // console.log(item);
-            <div key={index} className="">
-              <input
-                className="border-black border-2 rounded px-3 py-1 w-[21rem]"
-                type="text"
-                value={item.value}
-                onChange={(e) =>{
-                  handleInput(index,e.target.value)}
-                } 
-              />
-              
-            </div>
-          ))}
-           
-        </div>
-
-        <button onClick={handleAdd}>
-          <AddCircleOutlineIcon />
-        </button>
-     </div>
-
-
-    </div>
-
-    <hr className='mt-[1rem]'/>
- <div className=' w-[15rem] border-2 border-black rounded-full px-2 py-2 mt-2 text-center'><AddIcon/> Add work Experience</div>
-   </div>
-
-    </>
-  )
+  );
 }
 
-export default Work
+export default Work;

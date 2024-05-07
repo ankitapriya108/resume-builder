@@ -1,42 +1,30 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
+.registeration{
+  background: linear-gradient(to right,rgb(0, 0, 0),rgb(23, 127, 168),rgb(0, 0, 0));
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+background-clip: text;
+color: transparent;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+.login{
+  background: linear-gradient(to right,rgb(0, 0, 0),rgb(23, 127, 168),rgb(0, 0, 0));
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+  background-clip: text;
+  color: transparent;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.register-btn{
+  background: linear-gradient(to right,rgb(0, 0, 0),rgb(23, 127, 168),rgb(0, 0, 0));
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
 }
+.login-btn{
+  background: linear-gradient(to right,rgb(0, 0, 0),rgb(23, 127, 168),rgb(0, 0, 0));
+ 
 
-.card {
-  padding: 2em;
 }
+.box{
+box-shadow: 7px 7px 7px 10px rgba(37, 147, 180, 0.589);
+overflow: hidden;
+}
+.bg-register{
+  background-image: url(registeration.avif);
+  
 
-.read-the-docs {
-  color: #888;
-} */
+}

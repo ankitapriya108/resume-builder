@@ -1,76 +1,57 @@
-import React from 'react'
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-import SearchIcon from '@mui/icons-material/Search';
+import React, { useContext, useState } from 'react';
+import { userData } from './App';
+import AddCircleOutline from '@mui/icons-material/AddCircleOutline';
 
+function YourComponent() {
+const {data,setData} = useContext(userData)
 
-function Skills() {
+  const handleInputChange = (index, key, value) => {
+    const newData = [...data];
+    newData[index][key] = value;
+    setData(newData);
+  };
+
+  const handleAddRow = () => {
+    setData([...data, { id: data.length + 1, category: '', skills: '' }]);
+  };
+  
+
   return (
-    <>
-    <div className='container mx-auto'>
-    
-   <div className='flex justify-center gap-[1rem] items-center mt-[2rem]'>
-    <div>
-    <h3>Skills & Proficiencies</h3>
-    </div >
-
-    <div className='h-[2rem] w-[10rem] border-2 border-black  rounded-full '>
+    <div className='  mt-[3rem] ml-[5rem]'>
+      <table className='border-collapse border border-black'>
+        <thead>
+          <tr>
+            <th className='h-[3rem] w-[15rem] border border-black text-center bg-slate-400 px-1'>Category</th>
+            <th className='h-[3rem] w-[15rem] border border-black text-center bg-slate-400 px-1'>Skills</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row, index) => (
+            <tr key={row.id}>
+              <td className=' w-[15rem] border border-black text-left px-1'>
+                <input
+                  type="text"
+                  value={row.category}
+                  onChange={(e) => handleInputChange(index, 'category', e.target.value)}
+                  className='py-2 px-2'
+                />
+              </td>
+              <td className='h-[3rem] w-[15rem] border border-black text-left px-1'>
+                <input
+                  type="text"
+                  value={row.skills}
+                  onChange={(e) => handleInputChange(index, 'skills', e.target.value)}
+                  className='py-2 px-2'
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <AddCircleOutline onClick={handleAddRow}/>
+     
     </div>
-
-    <div className='h-[2rem] w-[10rem] border-2 border-black  rounded-full '>
-    </div>
-    <div className='h-[2rem] w-[2rem] border-2 border-black  rounded-full text-center'>
-      +
-    </div>
-   </div>
-   <input  className='h-[3rem] w-[10rem] border-2 border-black  rounded-full ml-4 mt-6 px-2'
-    type="text" 
-   placeholder='Search...'
-   />
-   <div>
-    <table className='ml-4 mt-4'>
-      <th>
-        <tr>
-        <td className='h-[3rem] w-[5rem] border-2 border-slate-300 bg-slate-300 text-left px-1'>Select</td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300 bg-slate-300 text-left px-1'>Category</td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300 bg-slate-300 text-left px-1'>Skils</td>
-        </tr>
-        <tr>
-        <td className='h-[3rem] w-[5rem] border-2 border-slate-300  text-center px-1'><input type="checkbox" /></td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Business Analysis</td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Agile</td>
-        </tr>
-        <tr>
-        <td className='h-[3rem] w-[5rem] border-2 border-slate-300  text-center px-1'><input type="checkbox" /></td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Business Analysis</td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Business Requirements Doc</td>
-        </tr>
-        <tr>
-        <td className='h-[3rem] w-[5rem] border-2 border-slate-300  text-center px-1'><input type="checkbox" /></td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Business Analysis</td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Flow Diagrams</td>
-        </tr>
-        <tr>
-        <td className='h-[3rem] w-[5rem] border-2 border-slate-300  text-center px-1'><input type="checkbox" /></td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Business Analysis</td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Wireframe</td>
-        </tr>
-        <tr>
-        <td className='h-[3rem] w-[5rem] border-2 border-slate-300  text-center px-1'><input type="checkbox" /></td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Business Analysis</td>
-        <td className='h-[3rem] w-[15rem] border-2 border-slate-300  text-left px-1'>Other</td>
-        </tr>
-       
-        
-      </th>
-    </table>
-   </div>
-    
-    </div>
-
-    
-    </>
-   
-  )
+  );
 }
 
-export default Skills
+export default YourComponent;

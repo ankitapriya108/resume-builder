@@ -10,7 +10,7 @@ function Edit() {
   const [counter, setCounter] = useState(1);
   const [nextPage, setNextPage] = useState(urlObject[counter]);
 
-  const {name,setName,role,setRole,totalExp,setTotalExp,about,setAbout,image,setImage,aboutPoint,setAboutPoint,client,setClient,country,setCountry,projectName,setProjectName,roleWork,setRoleWork,startDate,setStartDate,endDate,setEndDate,businessSolution,setBusinessSolution,projectRes,setProjectRes,technologyStack,setTechnologyStack } = useContext(userData);
+  const {name,setName,role,setRole,totalExp,setTotalExp,about,setAbout,image,setImage,aboutPoint,setAboutPoint,data,setData,workExperience,setWorkExperience} = useContext(userData);
 
 
   const handleNextClick = (e) => {
@@ -85,16 +85,11 @@ function handleSubmit(e) {
         about: about,
         aboutPoint: aboutPoint,
       },
+      skills:{
+        data: data
+      },
       work: {
-        client: client,
-        country: country,
-        projectName: projectName,
-        roleWork: roleWork,
-        startDate: startDate,
-        endDate: endDate,
-        businessSolution: businessSolution,
-        technologyStack: technologyStack,
-        projectRes: projectRes,
+      workExperience: workExperience
       }
     })
   })
@@ -106,6 +101,7 @@ function handleSubmit(e) {
     .catch((error) => {
       console.error("Error:", error);
     });
+    console.log(userData)
 }
 
 
@@ -122,8 +118,10 @@ function handleSubmit(e) {
             >
               Next <ArrowRightAltIcon />
             </Link>
+            <button type="submit" className="bg-slate-500 text-white rounded mt-[1rem] px-2 ml-2">SAVE</button>
+
           </div>
-        <button type="submit" className="border-2 border-slate-400 bg-slate-400 text-white rounded px-2 py-2">Save</button>
+        {/* <button type="submit" className="border-2 border-slate-400 bg-slate-400 text-white rounded px-2 py-2 ml-4">Save</button> */}
 
         </form>
         <Outlet />
