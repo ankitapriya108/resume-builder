@@ -6,7 +6,8 @@ import { userData } from './App'
 
 function RegisterPage() {
   const {register,setRegister} = useContext(userData)
-  const [registerStatus,setregisterStatus] = useState("")
+  const [registerStatus,setRegisterStatus] = useState("")
+  const [errorMessage, setErrorMessage] = useState('');
   // const [confirmPassword, setConfirmPassword] = useState('');
   // const handleChange = ( key, value) => {
   //   const newData = [...register,[key]];
@@ -17,7 +18,6 @@ function RegisterPage() {
   function handleChange(key,value){
   setRegister((prev)=> ({...prev,[key]:value}) ) }
 
-  
 function handleSubmit(e) {
   e.preventDefault();
 
@@ -26,26 +26,30 @@ function handleSubmit(e) {
     return;
   }
 
-
-
   fetch("http://localhost:8000/datasave", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify( register)
+    body: JSON.stringify(register),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('*Email already in use*');
+      }
+      return response.json();
+    })
     .then((user) => {
       console.log("Response:", user);
-      setregisterStatus("Registeration Successfull!!!")
-    
+      setRegisterStatus("Registration Successful!!!");
+      setErrorMessage('');
     })
     .catch((error) => {
-      console.error("Error:", error);
+      console.error("Error:", error.message);
+      setErrorMessage(error.message);
+      setRegisterStatus('');
     });
 }
-
 
 
   return (
@@ -71,6 +75,10 @@ function handleSubmit(e) {
     onChange={(e) => handleChange( 'email', e.target.value)}
     className='px-2 py-2 border-2 border-slate-500 w-[70%] rounded-xl mt-[1rem]'  />
 
+{errorMessage && (
+              <p className=' text-red-700 mt-[1rem]'>{errorMessage}</p>
+            )}
+
 <input type="password"
     placeholder='Create password:'
     value={register.createPassword}
@@ -81,8 +89,7 @@ function handleSubmit(e) {
     placeholder='confirm password:'
     value={register.confirmPassword}
     onChange={(e) => handleChange( 'confirmPassword', e.target.value)}
-    // value={confirmPassword}
-    // onChange={(e) => handleChange(e.target.value)}
+ 
     className='px-2 py-2 border-2 border-slate-500 w-[70%] rounded-xl mt-[1rem]'  />
 
     
@@ -92,13 +99,15 @@ function handleSubmit(e) {
     {registerStatus && (
       <p className=' text-green-700 text-center font-medium text-xl mt-[1rem]'>{registerStatus}</p>
     )}
+    {registerStatus &&(
     <NavLink to="/login" 
     className='border-2 border-black bg-white px-2 py-2 text-center w-[20%]  mt-[1rem]  font-bold rounded-xl ml-[13rem] inline-block'>
        NEXT
    </NavLink>
+    )}
     </div>
 
-    <div className=' bg-register w-full h-[100%]'>
+    <div className=' bg-register bg-cover w-full h-[100%]'>
    
   
     </div>

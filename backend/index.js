@@ -101,9 +101,10 @@ const rgSchema = new mongoose.Schema({
    
 })
 
+  
 const rgModel = mongoose.model("registeration", rgSchema);
 
-app.get("/",async(req,res)=>{
+app.get("/register",async(req,res)=>{
     const user = await rgModel.find();
     res.send(user)
     console.log(user)
@@ -114,6 +115,12 @@ app.post ("/datasave",async (req,res)=>{
     console.log(req.body)
 
     try{
+        const userExist = await rgModel.findOne({ email: user.email });
+        if (userExist) {
+            return res.status(400).json({ message: 'Email already in use' });
+        }
+    //    const userCreated = await user.create({user})
+
         const salt = await bcrypt.genSalt(10);
         const hashcreatePassword = await bcrypt.hash(user.createPassword,salt);
          user.createPassword = hashcreatePassword;
@@ -132,6 +139,31 @@ app.post ("/datasave",async (req,res)=>{
         console.log(error)
     }
 })
+
+
+
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    try {
+   
+      const user = await rgModel.findOne({ email });
+      if (!user) {
+        return res.status(400).json({ message: "Email not registered" });
+      }
+  
+    
+      const passwordMatch = await bcrypt.compare(password, user.createPassword);
+      if (!passwordMatch) {
+        return res.status(401).json({ message: "Incorrect password" });
+      }
+  
+     
+      res.status(200).json({ message: "Login successful", user });
+    } catch (error) {
+      console.error( error); 
+    }
+  });
+  
 
 mongoose.connect("mongodb://127.0.0.1:27017/resumebuilder").then((response) =>
     app.listen(port, () => {

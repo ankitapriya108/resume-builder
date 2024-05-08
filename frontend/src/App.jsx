@@ -10,9 +10,9 @@ import Skills from './Skills'
 import Work from './Work'
 import SelectSection from './SelectSection'
 import MyDetails from './MyDetails'
-import LoginPage from './LoginPage'
 import RegisterPage from './RegisterPage'
-// import RegisterPage from './RegisterPage'
+import LoginPage from './LoginPage'
+
 export const userData = createContext();
 
 
