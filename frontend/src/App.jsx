@@ -17,21 +17,14 @@ export const userData = createContext();
 
 
 function App() {
+  
+
 const [image,setImage] = useState("")
 const [name,setName] = useState("")
 const [role,setRole] = useState("")
 const [totalExp,setTotalExp] = useState("")
 const [about,setAbout] = useState("")
 const [aboutPoint,setAboutPoint] = useState([""])
-// const [client,setClient] = useState("")
-// const [country,setCountry] = useState("")
-// const [projectName,setProjectName] = useState("")
-// const [roleWork,setRoleWork] = useState("")
-// const [startDate,setStartDate] = useState("")
-// const [endDate,setEndDate] = useState("")
-// const [businessSolution,setBusinessSolution] = useState("")
-// const [projectRes,setProjectRes] = useState([""])
-// const [technologyStack,setTechnologyStack] = useState([""])
 const [data, setData] = useState([{ id: 1, category: '', skills: '' }]);
 const [workExperience, setWorkExperience] = useState([{
   clientDescription: "",

@@ -17,11 +17,7 @@ function AboutMe() {
 
   return (
    <>
-   {/* <div className='flex justify-end items-center gap-3 mt-3'>
-    <h4>Cancel</h4>
-    <button className='border-2 border-slate-300 bg-slate-300 rounded-sm py-1 px-2 '>Save</button>
-    <ArrowCircleRightIcon/>
-   </div> */}
+  
    
    <div className='flex  gap-[4rem] justify-center mt-[7rem]'>
     <div>
@@ -36,15 +32,7 @@ function AboutMe() {
     >
       {about}
     </textarea>
-     
-
-    {/* <input type="text" 
-    value={aboutPoint}
-    onChange={(e)=>{
-      setAboutPoint(e.target.value)
-    }}
-    className='h-[3rem] w-[20.5rem] border-2 border-black rounded-sm mt-5'
-    /><ControlPointIcon/> */}
+   
     <div className="flex ">
     <div className="flex flex-col gap-[1rem] mt-2">
           {aboutPoint.map((item, index) => (

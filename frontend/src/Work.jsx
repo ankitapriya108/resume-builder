@@ -116,7 +116,7 @@ function Work() {
                 className="border-2 border-gray-500 rounded w-[9rem] px-2 py-1"
               />
               <input
-                type="date"
+                type="date"  
                 value={form.endDate}
                 onChange={(e) => handleInput(index, "endDate", e.target.value)}
                 className="border-2 border-gray-500 rounded w-[9rem] px-2 py-1"

@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './App.css';
 
+
 function LoginPage() {
+
+
+
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -46,6 +51,7 @@ function LoginPage() {
 
             <div className='flex justify-center items-center gap-[3rem] mt-[2rem]'>
             <div className='px-2 py-2 flex justify-left items-center gap-[3rem] border-2 border-slate-500 w-[70%] rounded-xl'>
+            
                 <img src="./Google-img.webp" alt="" className='h-[2.5rem] w-[2.5rem]' />
                 <h1 className='font-bold'>Log in with Google</h1>
             </div>   

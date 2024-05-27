@@ -1,12 +1,10 @@
 .registeration{
   background: linear-gradient(to right,rgb(0, 0, 0),rgb(23, 127, 168),rgb(0, 0, 0));
-
 background-clip: text;
 color: transparent;
 }
 .login{
   background: linear-gradient(to right,rgb(0, 0, 0),rgb(23, 127, 168),rgb(0, 0, 0));
-
   background-clip: text;
   color: transparent;
   }

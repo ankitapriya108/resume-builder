@@ -5,9 +5,12 @@ import Home from './Home.jsx'
 import './index.css'
 import Builder from './Builder.jsx'
 
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <Home/>
-  // <Builder/>
+
   <App/>
+
+
 
 )
